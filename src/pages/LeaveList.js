@@ -5,13 +5,13 @@ function LeaveList() {
  const [leaves, setLeaves] = useState([]);
   const user = JSON.parse(localStorage.getItem("user"));
 
-  useEffect(() => {
-    if (user && user.id) {
-      axios.get(`http://localhost:8080/api/leaves/user/${user.id}`)
-        .then(res => setLeaves(res.data))
-        .catch(err => alert("Failed to fetch leaves"));
-    }
-  }, [user]);
+ useEffect(() => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) return;
+  axios.get(`http://localhost:8080/api/leaves/user/${user.id}`)
+    .then(res => setLeaves(res.data))
+    .catch(() => setLeaves([]));
+}, [user]);
 
   if (!user || !user.id) {
     return <div className="container mt-5"><h4>Please login to view your leave records.</h4></div>;

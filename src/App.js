@@ -1,19 +1,23 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import ApplyLeave from "./components/ApplyLeave";
-import LeaveList from "./components/LeaveList";
-import Navbar from "./components/Navbar";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ApplyLeave from "./pages/ApplyLeave";
+import LeaveList from "./pages/LeaveList";
+import Header from "./components/Header";
+import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   return (
-      <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/apply" element={<ApplyLeave />} />
-        <Route path="/LeaveList" element={<LeaveList />} />
-      </Routes>
+    <Router>
+      <Header />
+      <div className="container mt-4">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/apply" element={<ProtectedRoute><ApplyLeave /></ProtectedRoute>} />
+          <Route path="/LeaveList" element={<ProtectedRoute><LeaveList /></ProtectedRoute>} />
+        </Routes>
+      </div>
     </Router>
   );
 }
