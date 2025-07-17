@@ -19,8 +19,13 @@ const Header = () => {
             <>
               <li className="nav-item"><Link className="nav-link" to="/apply">Apply</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/myleaves">My Leaves</Link></li>
+
+              {user?.role === "admin" && (
+                <li className="nav-item"><Link className="nav-link" to="/admin">Admin</Link></li>
+              )}
             </>
           )}
+
           {!user && (
             <>
               <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
